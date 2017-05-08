@@ -1,7 +1,8 @@
 import collections
-import MinHeap
-#Minimum Spanning Trees
+import MinHeapMap as MinHeap
+import DisjointSet as DS
 
+#Minimum Spanning Trees
 def makeGraph(edges):
 	G, W = collections.defaultdict(list), {}
 	V = [] # list of vertices. will be used for heap
@@ -13,6 +14,7 @@ def makeGraph(edges):
 		W[(e[0],e[1])] = e[2]
 		W[(e[1],e[0])] = e[2]
 	return G, W, V
+
 #Prim
 def prims(edges):
 	G, W, V = makeGraph(edges)
@@ -32,9 +34,19 @@ def prims(edges):
 
 #Kruskal
 def kruskals(edges):
-	return 
-
-
+	edges.sort(key=lambda x: x[2]) # sort according to weight
+	vertices = set()
+	for e in edges:
+		vertices.add(e[0])
+		vertices.add(e[1])
+	res, total_length = [], 0
+	# creating a disjoint set of all vertices
+	dj = DS.DisjointSet(list(vertices)) 
+	for e in edges:
+		if dj.union(e[0], e[1]):
+			res.append((e[0],e[1]))
+			total_length += e[2]
+	return res, total_length
 
 edges = \
 	[
@@ -43,4 +55,5 @@ edges = \
 		['E','F',2]
 	]
 
-print(prims(edges))
+#print(prims(edges))
+print(kruskals(edges))

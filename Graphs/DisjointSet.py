@@ -29,10 +29,10 @@ class DisjointSet:
         # if either does not exist or both are in the same set
         if not U or not V or U == V: return False
         if self.ranks[V] > self.ranks[U]: # since u has the higher rank, merge v to u
-            self.parents[u] = V
+            self.parents[U] = V
         else: # merge u to v
             if self.ranks[U] == self.ranks[V]: self.ranks[U] += 1 # increment if two are the same
-            self.parents[v] = U
+            self.parents[V] = U
         return True
     
     def showRanks(self):

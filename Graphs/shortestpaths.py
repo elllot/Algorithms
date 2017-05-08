@@ -100,4 +100,5 @@ def dijkstra(edges, src):
 edges = [['A','E',2],['A','B',5],['A','D',9] \
         ,['E','F',3],['B','C',2],['F','D',2],['C','D',3]]
 
-dijkstra(edges, 'A')
+#dijkstra(edges, 'A')
+bellmanFord(edges, 'A')
