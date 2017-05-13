@@ -45,12 +45,15 @@ class DisjointSet:
         print(self.ranks)
         print(self.parents)
 
-arr = ['a','b','c','d','e','f','g']
-dj = DisjointSet(arr)
-dj.union('a', 'b')
-dj.union('b', 'c')
-dj.union('c', 'e')
-dj.union('g', 'e')
-dj.union('d', 'f')
-dj.showRanks()
-dj.showParents()
+
+if __name__ == "__main__":
+
+    arr = ['a','b','c','d','e','f','g']
+    dj = DisjointSet(arr)
+    dj.union('a', 'b')
+    dj.union('b', 'c')
+    dj.union('c', 'e')
+    dj.union('g', 'e')
+    dj.union('d', 'f')
+    dj.showRanks()
+    dj.showParents()
