@@ -3,9 +3,8 @@ from collections import defaultdict, deque
 def top_sort(v, G, V, order):
 	if v in V: return
 	V.add(v)
-	if v in G:
-		for vt in G[v]:
-			top_sort(vt, G, V, order)
+	for vt in G.get(v, []):
+		top_sort(vt, G, V, order)
 	order.appendleft(v)
 
 def shortest_path(edges, src):
@@ -22,11 +21,10 @@ def shortest_path(edges, src):
 		top_sort(v, G, V, order)
 	D[src] = 0
 	for v in order:
-		if v in G:
-			for vt in G[v]:
-				new_dist = D[v] + W[(v, vt)]
-				if new_dist < D[vt]:
-					D[vt] = new_dist
+		for vt in G.get(v, []):
+			new_dist = D[v] + W[(v, vt)]
+			if new_dist < D[vt]:
+				D[vt] = new_dist
 	print(D)
 
 if __name__ == "__main__":

@@ -9,12 +9,11 @@ def reachable(edges, src, trg):
 	while stack:
 		v = stack.pop()
 		visited.add(v)
-		if v in G:
-			for vt in G[v]:
-				if vt == trg: return True
-				if vt not in visited:
-					visited.add(vt)
-					stack.append(vt)
+		for vt in G.get(v, []):
+			if vt == trg: return True
+			if vt not in visited:
+				visited.add(vt)
+				stack.append(vt)
 	return False
 
 if __name__ == "__main__":

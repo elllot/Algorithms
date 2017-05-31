@@ -25,11 +25,10 @@ def prims(edges):
 		v, w = heap.extract_min()
 		print(v, w)
 		if v in mEdges: res.append(mEdges.pop(v))
-		if v in G:
-			for vt in G[v]:
-				if heap.containsKey(vt) and heap.getValueByKey(vt) > W[(v, vt)]: 
-					heap.decreaseKey(vt, W[(v, vt)]) # decrease key in heap
-					mEdges[vt] = (v, vt) # indicate source 
+		for vt in G.get(v, []):
+			if heap.containsKey(vt) and heap.getValueByKey(vt) > W[(v, vt)]: 
+				heap.decreaseKey(vt, W[(v, vt)]) # decrease key in heap
+				mEdges[vt] = (v, vt) # indicate source 
 	return res
 
 #Kruskal

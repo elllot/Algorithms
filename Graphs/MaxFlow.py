@@ -14,14 +14,13 @@ def makeGraph(edges):
 def find_path(queue, parents, visited, G, W, sink):
     while queue:
         v = queue.popleft()
-        if v in G:
-            for vt in G[v]:
-                if W[v][vt] > 0: # residual capacity > 0 indicates reachability 
-                    if vt not in visited:
-                        parents[vt] = v
-                        if vt == sink: return True
-                        visited.add(vt)
-                        queue.append(vt)
+        for vt in G.get(v, []):
+            if W[v][vt] > 0: # residual capacity > 0 indicates reachability 
+                if vt not in visited:
+                    parents[vt] = v
+                    if vt == sink: return True
+                    visited.add(vt)
+                    queue.append(vt)
     return False
 
 # helper method to find the min_flow (bottleneck) of an augmented path
