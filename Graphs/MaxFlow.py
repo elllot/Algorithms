@@ -1,14 +1,15 @@
 from collections import defaultdict, deque
 
 def makeGraph(edges):
+    # W: Residual Capacities
     G, W = defaultdict(list), defaultdict(dict)
-    for e in edges:
+    for f,t,w in edges:
         # adjacency lists
-        G[e[0]].append(e[1])
-        G[e[1]].append(e[0])
+        G[f].append(t)
+        G[t].append(f)
         # would need to take care of duplicate edges in case of erroneous input
-        W[e[0]][e[1]] = e[2]
-        W[e[1]][e[0]] = 0 # Adding backward edge
+        W[f][t] = w
+        W[t].setdefault(f, 0) # In case a backward edge already exits
     return G, W
 
 def find_path(queue, parents, visited, G, W, sink):
